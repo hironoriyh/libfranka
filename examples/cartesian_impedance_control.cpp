@@ -25,10 +25,10 @@
 
 int main(int argc, char** argv) {
   // Check whether the required arguments were passed
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
-    return -1;
-  }
+  // if (argc != 2) {
+  //   std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
+  //   return -1;
+  // }
 
   // Compliance parameters
   const double translational_stiffness{150.0};
@@ -45,7 +45,8 @@ int main(int argc, char** argv) {
 
   try {
     // connect to robot
-    franka::Robot robot(argv[1]);
+    franka::Robot robot("172.16.0.2");
+    robot.automaticErrorRecovery();
     setDefaultBehavior(robot);
     // load the kinematics and dynamics model
     franka::Model model = robot.loadModel();

@@ -16,12 +16,13 @@
  */
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
-    return -1;
-  }
+  // if (argc != 2) {
+  //   std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
+  //   return -1;
+  // }
   try {
-    franka::Robot robot(argv[1]);
+    franka::Robot robot("172.16.0.2");
+    robot.automaticErrorRecovery();
     setDefaultBehavior(robot);
 
     // First move the robot to a suitable joint configuration
@@ -58,7 +59,7 @@ int main(int argc, char** argv) {
         lower_force_thresholds_nominal, upper_force_thresholds_nominal);
 
     double time_max = 4.0;
-    double v_max = 0.1;
+    double v_max = 0.5;
     double angle = M_PI / 4.0;
     double time = 0.0;
     robot.control([=, &time](const franka::RobotState&,

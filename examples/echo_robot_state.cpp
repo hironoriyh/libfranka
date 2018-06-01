@@ -11,20 +11,20 @@
  */
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
-    return -1;
-  }
+  // if (argc != 2) {
+  //   std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
+  //   return -1;
+  // }
 
   try {
-    franka::Robot robot(argv[1]);
+    franka::Robot robot("172.16.0.2");
 
     size_t count = 0;
     robot.read([&count](const franka::RobotState& robot_state) {
       // Printing to std::cout adds a delay. This is acceptable for a read loop such as this, but
       // should not be done in a control loop.
       std::cout << robot_state << std::endl;
-      return count++ < 100;
+      return count++ < 1;
     });
 
     std::cout << "Done." << std::endl;

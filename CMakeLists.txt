@@ -41,6 +41,7 @@ endif()
 
 ## Submodules
 add_subdirectory(common)
+#add_subdirectory(src)
 
 ## Library
 add_library(franka SHARED

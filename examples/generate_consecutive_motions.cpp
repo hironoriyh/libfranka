@@ -17,12 +17,13 @@
  */
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
-    return -1;
-  }
+  // if (argc != 2) {
+  //   std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
+  //   return -1;
+  // }
   try {
-    franka::Robot robot(argv[1]);
+    franka::Robot robot("172.16.0.2");
+    robot.automaticErrorRecovery();
     setDefaultBehavior(robot);
 
     // First move the robot to a suitable joint configuration

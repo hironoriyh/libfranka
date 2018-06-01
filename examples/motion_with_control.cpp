@@ -111,10 +111,10 @@ std::vector<double> generateTrajectory(double a_max) {
 void writeLogToFile(const std::vector<franka::Record>& log);
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
-    return -1;
-  }
+  // if (argc != 2) {
+  //   std::cerr << "Usage: " << argv[0] << " <robot-hostname>" << std::endl;
+  //   return -1;
+  // }
 
   // Parameters
   const size_t joint_number{3};
@@ -126,7 +126,8 @@ int main(int argc, char** argv) {
   Controller controller(filter_size, K_P, K_D);
 
   try {
-    franka::Robot robot(argv[1]);
+    franka::Robot robot("172.16.0.2");
+    robot.automaticErrorRecovery();
     setDefaultBehavior(robot);
 
     // First move the robot to a suitable joint configuration
